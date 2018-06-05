@@ -26,6 +26,8 @@ const gridConfigs = {
   columns: 0,
 };
 
+const customProperties = {}
+
 buttonSaveColor.addEventListener('click', () => {
   const li = document.createElement('li');
   li.classList.add('item');
@@ -48,6 +50,10 @@ buttonSaveColor.addEventListener('click', () => {
   li.appendChild(button);
 
   colorList.appendChild(li);
+
+  const nameColorNormalize = nameColor.value.toLowerCase().replace(/\s/g,'');
+
+  customProperties[nameColorNormalize] = li.currentColor;
 });
 
 const createGrid = () => {
@@ -60,8 +66,14 @@ const createGrid = () => {
     const pixel = document.createElement('div');
 
     pixel.addEventListener('click', (e) => {
-      e.target.style = `--color: ${currentColor}`;
-    })
+      const array = Object.keys(customProperties);
+
+      array.forEach(key => {
+        if (customProperties[key] == currentColor) {
+          e.target.style = `--color: var(--${key}, ${currentColor})`;
+        };
+      });
+    });
     pixel.classList.add('pixel');
     grid.appendChild(pixel);
   };
@@ -88,15 +100,17 @@ const generateHTML = () => {
 };
 
 const generateCSS = () => {
-  cssBox.value = `.grid {
-    display: inline-grid;
-    grid-template-rows: repeat(${gridConfigs.rows}, ${gridConfigs.pixelSize}px);
-    grid-template-columns: repeat(${gridConfigs.columns}, ${gridConfigs.pixelSize}px);
-  }
+  const array = Object.keys(customProperties);
   
-  .pixel {
-    background-color: var(--color);
-  }`;
+  let variables = '';
+
+  array.forEach(key => {
+    variables = `${variables}--${key}: ${customProperties[key]};\n`;
+  });
+
+  cssBox.value = `.grid {\n\t${variables}\tdisplay: inline-grid;\n\tgrid-template-rows: repeat(${gridConfigs.rows}, ${gridConfigs.pixelSize}px);\n\tgrid-template-columns: repeat(${gridConfigs.columns}, ${gridConfigs.pixelSize}px);\n}
+  
+  .pixel {\n\tbackground-color: var(--color);\n}`;
 };
 
 generateCode.addEventListener('click', () => {
