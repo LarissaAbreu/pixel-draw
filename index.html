@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <label for="color">Color</label>
+    <input id="color" type="color" value="#000">
+    <label for="nameColor">Name color:</label>
+    <input id="nameColor">
+    <button id="saveColor">Add color</button>
+
+    <ul id="listColor"></ul>
+    
+    <div id="grid" class="grid"></div>
+
+    <button id="generate">Generate</button>
+
+    <textarea id="htmlCode"></textarea>
+    <textarea id="cssCode"></textarea>
+
+    <label for="size">Size</label>
+    <input id="size" type="number" placeholder="tamanho do pixel" value="10">
+    <label for="row">Rows</label>
+    <input id="row" type="number" placeholder="quantidade de linhas" value="20">
+    <label for="column">Column</label>
+    <input id="column" type="number" placeholder="quantidade de colunas" value="20">
+    <button id="save">Save</button>
+
+    <span id="currentColor" class="current-color">Current color</span>
+
+    <script src="./draw.js"></script>
+  </body>
+</html>
