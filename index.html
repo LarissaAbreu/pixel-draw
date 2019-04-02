@@ -1,34 +1,39 @@
-<!doctype html>
-<html>
-  <head>
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
-    <label for="color">Color</label>
-    <input id="color" type="color" value="#000">
-    <label for="nameColor">Name color:</label>
-    <input id="nameColor">
-    <button id="saveColor">Add color</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pixel draw</title>
 
-    <ul id="listColor"></ul>
-    
-    <div id="grid" class="grid"></div>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <label for="color">Color</label>
+  <input id="color" type="color" value="#000000">
+  <label for="nameColor">Name color:</label>
+  <input id="nameColor">
+  <button id="saveColor">Add color</button>
 
-    <button id="generate">Generate</button>
+  <ul id="listColor"></ul>
+  
+  <div id="grid" class="grid"></div>
 
-    <textarea id="htmlCode"></textarea>
-    <textarea id="cssCode"></textarea>
+  <button id="generate">Generate my draw code</button>
 
-    <label for="size">Size</label>
-    <input id="size" type="number" placeholder="tamanho do pixel" value="10">
-    <label for="row">Rows</label>
-    <input id="row" type="number" placeholder="quantidade de linhas" value="20">
-    <label for="column">Column</label>
-    <input id="column" type="number" placeholder="quantidade de colunas" value="20">
-    <button id="save">Save</button>
+  <textarea id="htmlCode"></textarea>
+  <textarea id="cssCode"></textarea>
 
-    <span id="currentColor" class="current-color">Current color</span>
+  <label for="size">Size</label>
+  <input id="size" type="number" placeholder="size of pixel" value="10">
+  <label for="row">Rows</label>
+  <input id="row" type="number" placeholder="number of rows" value="20">
+  <label for="column">Column</label>
+  <input id="column" type="number" placeholder="number of lines" value="20">
+  <button id="save">Save</button>
 
-    <script src="./draw.js"></script>
-  </body>
+  <span id="currentColor" class="current-color">Current color</span>
+
+  <script src="./draw.js"></script>
+</body>
 </html>

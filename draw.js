@@ -17,7 +17,7 @@ const cssBox = document.getElementById('cssCode');
 
 const grid = document.getElementById('grid');
 
-let currentColor = '#000';
+let currentColor;
 let totalPixel = 0;
 
 const gridConfigs = {
@@ -45,6 +45,13 @@ buttonSaveColor.addEventListener('click', () => {
   const button = document.createElement('button');
   const buttonText = document.createTextNode('Remove color');
   button.appendChild(buttonText);
+
+  button.addEventListener('click', (e) => {
+    li.remove();
+		currentColor = '';
+		console.log(currentColor);
+    // colorCurrent.style = `--item-color: none;`;
+  });
 
   li.appendChild(span);
   li.appendChild(button);
