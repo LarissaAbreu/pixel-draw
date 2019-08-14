@@ -133,8 +133,12 @@ generateCode.addEventListener('click', () => {
   generateCSS();
 });
 
+const copyToClipboard = (el) => {
+  el.select();
+  document.execCommand('copy');
+  console.log(el.value);
+};
+
 const copyHTML = document.getElementById('copyHTML');
 
-// copyHTML.addEventListener('click', () => {
-//   htmlBox.document.execCommand('copy');
-// });
+copyHTML.addEventListener('click', () => copyToClipboard(htmlBox));
