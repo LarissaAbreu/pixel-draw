@@ -136,9 +136,11 @@ generateCode.addEventListener('click', () => {
 const copyToClipboard = (el) => {
   el.select();
   document.execCommand('copy');
-  console.log(el.value);
 };
 
 const copyHTML = document.getElementById('copyHTML');
-
 copyHTML.addEventListener('click', () => copyToClipboard(htmlBox));
+
+const copyCSS = document.getElementById('copyCSS');
+copyCSS.addEventListener('click', () => copyToClipboard(cssBox));
+
