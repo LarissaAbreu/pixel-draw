@@ -77,6 +77,8 @@ cancelSettings.addEventListener('click', closeCardSettings);
 saveSettings.addEventListener('click', () => {
   closeCardSettings();
   createGrid();
+  htmlBox.value = '';
+  cssBox.value= '';
 });
 
 buttonAddColor.addEventListener('click', () => {
