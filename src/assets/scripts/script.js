@@ -107,6 +107,10 @@ buttonAddColor.addEventListener('click', () => {
   nameColor.value = '';
 });
 
+currentColor
+? colorCurrent.style.display = 'block'
+: colorCurrent.style.display = 'none'
+
 const generateHTML = () => {
   let allDivs = '';
 
@@ -145,4 +149,3 @@ copyHTML.addEventListener('click', () => copyToClipboard(htmlBox));
 
 const copyCSS = document.getElementById('copyCSS');
 copyCSS.addEventListener('click', () => copyToClipboard(cssBox));
-
