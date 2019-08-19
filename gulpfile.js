@@ -53,5 +53,5 @@ gulp.task('serve', () => {
 });
 
 gulp.task('deploy', ['build', 'ghpages']);
-gulp.task('build', ['pug', 'stylus', 'imagemin', 'babel']);
+gulp.task('build', ['pug', 'stylus', 'imagemin', 'babel', 'copy']);
 gulp.task('server', ['serve', 'watch']);

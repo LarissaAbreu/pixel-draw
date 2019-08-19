@@ -82,37 +82,64 @@ saveSettings.addEventListener('click', () => {
 });
 
 buttonAddColor.addEventListener('click', () => {
+
+  // Create a li element
   const li = document.createElement('li');
   li.classList.add('listColor__item');
-  li.currentColor = inputColor.value;
-  li.addEventListener('click', () => {
-    currentColor = li.currentColor;
+
+  // Create a div element
+  const div = document.createElement('div');
+  div.classList.add('listColor__item__div');
+  div.setAttribute('title', 'Select color');
+
+  // When click in div add color to current color
+  div.currentColor = inputColor.value;
+  div.addEventListener('click', () => {
+    currentColor = div.currentColor;
     colorCurrent.style = `--item-color: ${currentColor}`;
   });
 
+  // Create a span with name color and a before element with the color
   const span = document.createElement('span');
   const spanText = document.createTextNode(nameColor.value);
   span.classList.add('listColor__item__nameColor');
   span.style = `--item-color: ${inputColor.value};`;
   span.appendChild(spanText);
 
+  // Create a remove color button
   const button = document.createElement('button');
+  button.setAttribute('title', 'Remove color');
   button.classList.add('listColor__item__removeColor__button');
 
+  // Create a remove color icon and add to remove color button
   const icon = document.createElement('img');
-
   icon.classList.add('listColor__item__icon');
   icon.setAttribute('src', '../icons/delete.svg');
   button.appendChild(icon);
 
-  li.appendChild(span);
+  div.appendChild(span);
+
+  li.appendChild(div);
   li.appendChild(button);
+
+  // Add and remove hover style on item
+  div.addEventListener('mouseover', (e) => e.target.closest('li').classList.add('hover__item'));
+
+  div.addEventListener('mouseout', (e) => e.target.closest('li').classList.remove('hover__item'));
+
+  // Remove color from palette
+  button.addEventListener('click', (e) => {
+    const ul = e.target.closest('ul');
+    const li = e.target.closest('li');
+
+    ul.removeChild(li);
+  })
 
   colorList.appendChild(li);
 
   const nameColorNormalize = nameColor.value.toLowerCase().replace(/\s/g, '');
 
-  customProperties[nameColorNormalize] = li.currentColor;
+  customProperties[nameColorNormalize] = div.currentColor;
 
   nameColor.value = '';
 });

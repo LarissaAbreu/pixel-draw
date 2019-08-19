@@ -117,9 +117,16 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: 5px 0;
+  position: relative;
 }
 
-.listColor__item:hover {
+.listColor__item__div {
+  width: 85%;
+  display: flex;
+  align-items: center;
+}
+
+.hover__item {
   font-weight: 400;
   background-color: list-color-secondary-item;
   cursor: pointer;
@@ -141,16 +148,16 @@ body {
 }
 
 .listColor__item__removeColor__button {
-  box-sizing: border-box;
-  background-color: transparent;
-}
-
-.listColor__item__icon:hover {
-  cursor: pointer;
-}
-
-.listColor__item__icon__fill {
-  fill: #fff;;
+  background-color: #430C15;
+  border: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5px;
 }
 
 .conteudo {
