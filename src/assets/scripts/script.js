@@ -81,6 +81,13 @@ saveSettings.addEventListener('click', () => {
   cssBox.value= '';
 });
 
+const buttonClear = document.getElementById('clear');
+buttonClear.addEventListener('click', () => {
+  createGrid();
+  htmlBox.value = '';
+  cssBox.value= '';
+})
+
 buttonAddColor.addEventListener('click', () => {
 
   // Create a li element
