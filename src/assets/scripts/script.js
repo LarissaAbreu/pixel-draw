@@ -96,7 +96,17 @@ buttonAddColor.addEventListener('click', () => {
   span.style = `--item-color: ${inputColor.value};`;
   span.appendChild(spanText);
 
+  const button = document.createElement('button');
+  button.classList.add('listColor__item__removeColor__button');
+
+  const icon = document.createElement('img');
+
+  icon.classList.add('listColor__item__icon');
+  icon.setAttribute('src', '../icons/delete.svg');
+  button.appendChild(icon);
+
   li.appendChild(span);
+  li.appendChild(button);
 
   colorList.appendChild(li);
 

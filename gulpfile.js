@@ -5,6 +5,11 @@ const connect = require('gulp-connect');
 const imagemin = require('gulp-imagemin');
 const babel = require('gulp-babel');
 
+gulp.task('copy', () => {
+  gulp.src('./src/icons/delete.svg')
+      .pipe(gulp.dest('./out/icons'));
+});
+
 gulp.task('pug', () => {
   gulp.src('./src/*.pug')
       .pipe(pug())
