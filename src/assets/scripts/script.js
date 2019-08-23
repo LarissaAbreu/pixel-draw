@@ -7,6 +7,8 @@ const inputColor = document.getElementById('inputColor');
 const nameColor = document.getElementById('inputNameColor');
 const buttonAddColor = document.getElementById('addColor');
 
+const btnRemoveAll = document.getElementById('removeAllColors');
+
 const colorList = document.getElementById('listColor');
 
 const colorCurrent = document.getElementById('currentColor');
@@ -62,7 +64,16 @@ const createGrid = () => {
   gridConfigs.columns = inputColumns.value;
 };
 
+const hasCollor = () => {
+  const colorPalette = document.querySelectorAll('.listColor__item');
+
+  (colorPalette.length <= 1)
+  ? btnRemoveAll.style.display = 'none'
+  : btnRemoveAll.style.display = 'block'
+};
+
 createGrid();
+hasCollor();
 
 settings.addEventListener('click', () => {
   cardSettings.hasAttribute('style')
@@ -140,15 +151,26 @@ buttonAddColor.addEventListener('click', () => {
     const li = e.target.closest('li');
 
     ul.removeChild(li);
+    hasCollor();
   })
 
   colorList.appendChild(li);
+  hasCollor();
 
   const nameColorNormalize = nameColor.value.toLowerCase().replace(/\s/g, '');
 
   customProperties[nameColorNormalize] = div.currentColor;
 
   nameColor.value = '';
+});
+
+// Button remove all colors
+
+btnRemoveAll.addEventListener('click', () => {
+  while (colorList.hasChildNodes()) {
+    colorList.removeChild(colorList.firstChild);
+  };
+  hasCollor();
 });
 
 currentColor

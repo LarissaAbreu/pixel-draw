@@ -79,7 +79,8 @@ body {
   color: #000;
 }
 
-.aside__addcolor {
+.aside__addcolor,
+.aside__listColor__removeAllColors {
   width: 100%;
   padding: 8px;
 }
@@ -92,9 +93,20 @@ body {
 }
 
 .aside__addcolor:hover,
-.grid__generateCode:hover {
+.grid__generateCode:hover{
   background-color: highlight-color;
   color: text-color;
+}
+
+.aside__listColor__removeAllColors {
+  background-color: btn-remove;
+  border: 0;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.aside__listColor__removeAllColors:hover {
+  opacity: 0.7;
 }
 
 .aside__listColor {
@@ -150,7 +162,7 @@ body {
 }
 
 .listColor__item__removeColor__button {
-  background-color: #430C15;
+  background-color: btn-remove;
   border: 0;
   position: absolute;
   right: 0;
