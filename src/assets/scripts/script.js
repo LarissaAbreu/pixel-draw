@@ -22,6 +22,7 @@ const grid = document.getElementById('grid');
 let currentColor;
 let totalPixel = 0;
 
+// Define default grid configs
 const gridConfigs = {
   pixelSize: 0,
   rows: 0,
@@ -34,6 +35,7 @@ const generateCode = document.getElementById('generateCode');
 const htmlBox = document.getElementById('codeHtml');
 const cssBox = document.getElementById('codeCss');
 
+// Create grid based in configs
 const createGrid = () => {
   grid.style = `--size: ${inputSize.value}px; --row: ${inputRows.value}; --column: ${inputColumns.value};`;
 
@@ -41,13 +43,15 @@ const createGrid = () => {
 
   grid.innerHTML = '';
 
+  // Create all grid layout divs
   for (let index = 0; index < totalPixel; index++) {
     const pixel = document.createElement('div');
 
+    // Add a individual click in grid divs
     pixel.addEventListener('click', (e) => {
-      console.log(customProperties);
       const array = Object.keys(customProperties);
 
+      // Insert current color in clicked div
       array.forEach(key => {
         if (customProperties[key] == currentColor) {
           e.target.style = `--color: var(--${key}, ${currentColor});`;
@@ -65,6 +69,7 @@ const createGrid = () => {
   gridConfigs.columns = inputColumns.value;
 };
 
+// Verify if has 0 or 1 color in palette and show or remove button "Remove all colors"
 const hasCollor = () => {
   const colorPalette = document.querySelectorAll('.listColor__item');
 
@@ -76,6 +81,7 @@ const hasCollor = () => {
 createGrid();
 hasCollor();
 
+// Configure box of grid settings
 settings.addEventListener('click', () => {
   cardSettings.hasAttribute('style')
   ? cardSettings.removeAttribute('style')
@@ -93,6 +99,7 @@ saveSettings.addEventListener('click', () => {
   cssBox.value= '';
 });
 
+// Clear all grid divs
 const buttonClear = document.getElementById('clear');
 buttonClear.addEventListener('click', () => {
   createGrid();
@@ -124,12 +131,14 @@ buttonAddColor.addEventListener('click', () => {
   const span = document.createElement('span');
   let spanText;
 
+  // Add name color in Custom Properties list
   if (nameColor.value) {
     spanText = document.createTextNode(nameColor.value);
     span.appendChild(spanText);
     customProperties[nameColorNormalize(nameColor.value)] = div.currentColor;
     nameColor.value = '';
   } else {
+    // Case user don't declarate a name for color
     const formatColor = (color) => color.substr(1);
     const color = inputColor.value;
     const url = `https://api.color.pizza/v1/${formatColor(color)}`;
@@ -181,7 +190,6 @@ buttonAddColor.addEventListener('click', () => {
 });
 
 // Button remove all colors
-
 btnRemoveAll.addEventListener('click', () => {
   while (colorList.hasChildNodes()) {
     colorList.removeChild(colorList.firstChild);
@@ -189,10 +197,12 @@ btnRemoveAll.addEventListener('click', () => {
   hasCollor();
 });
 
+// Show or remove "current color" span
 currentColor
 ? colorCurrent.style.display = 'block'
 : colorCurrent.style.display = 'none'
 
+// Generate the HTML code
 const generateHTML = () => {
   let allDivs = '';
 
@@ -204,6 +214,7 @@ const generateHTML = () => {
   htmlBox.value = `<div class="grid">\n${allDivs}</div>`;
 };
 
+// Gerenate the CSS code
 const generateCSS = () => {
   const array = Object.keys(customProperties);
 
@@ -221,6 +232,7 @@ generateCode.addEventListener('click', () => {
   generateCSS();
 });
 
+// Copy to clipboard button
 const copyToClipboard = (el) => {
   el.select();
   document.execCommand('copy');
