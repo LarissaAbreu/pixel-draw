@@ -45,6 +45,7 @@ const createGrid = () => {
     const pixel = document.createElement('div');
 
     pixel.addEventListener('click', (e) => {
+      console.log(customProperties);
       const array = Object.keys(customProperties);
 
       array.forEach(key => {
@@ -97,7 +98,9 @@ buttonClear.addEventListener('click', () => {
   createGrid();
   htmlBox.value = '';
   cssBox.value= '';
-})
+});
+
+const nameColorNormalize = (color) => color.toLowerCase().replace(/\s/g, '');
 
 buttonAddColor.addEventListener('click', () => {
 
@@ -119,10 +122,29 @@ buttonAddColor.addEventListener('click', () => {
 
   // Create a span with name color and a before element with the color
   const span = document.createElement('span');
-  const spanText = document.createTextNode(nameColor.value);
+  let spanText;
+
+  if (nameColor.value) {
+    spanText = document.createTextNode(nameColor.value);
+    span.appendChild(spanText);
+    customProperties[nameColorNormalize(nameColor.value)] = div.currentColor;
+    nameColor.value = '';
+  } else {
+    const formatColor = (color) => color.substr(1);
+    const color = inputColor.value;
+    const url = `https://api.color.pizza/v1/${formatColor(color)}`;
+
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {
+        spanText = document.createTextNode(data.colors[0].name);
+        span.appendChild(spanText);
+        customProperties[nameColorNormalize(data.colors[0].name)] = div.currentColor;
+      })
+      .catch((err) => console.log(err));
+  };
   span.classList.add('listColor__item__nameColor');
   span.style = `--item-color: ${inputColor.value};`;
-  span.appendChild(spanText);
 
   // Create a remove color button
   const button = document.createElement('button');
@@ -156,12 +178,6 @@ buttonAddColor.addEventListener('click', () => {
 
   colorList.appendChild(li);
   hasCollor();
-
-  const nameColorNormalize = nameColor.value.toLowerCase().replace(/\s/g, '');
-
-  customProperties[nameColorNormalize] = div.currentColor;
-
-  nameColor.value = '';
 });
 
 // Button remove all colors
