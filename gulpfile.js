@@ -4,6 +4,7 @@ const stylus = require('gulp-stylus');
 const connect = require('gulp-connect');
 const imagemin = require('gulp-imagemin');
 const babel = require('gulp-babel');
+const ghPages = require('gulp-gh-pages');
 
 gulp.task('copy', () => {
   gulp.src('./src/icons/delete.svg')
@@ -51,6 +52,8 @@ gulp.task('serve', () => {
     livereload: true
   });
 });
+
+gulp.task('ghpages', () => gulp.src('./out/**/*').pipe(ghPages()));
 
 gulp.task('deploy', ['build', 'ghpages']);
 gulp.task('build', ['pug', 'stylus', 'imagemin', 'babel', 'copy']);
